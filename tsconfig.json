@@ -16,6 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@club/*": ["src/core/feature/club/*"],
+      "@domain/*": ["src/domain/*"],
+      "@useCases/*": ["src/usecases/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+    }
+  },
 }

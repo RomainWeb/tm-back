@@ -1,46 +1,48 @@
 import {
+  CallHandler,
+  ExecutionContext,
   Injectable,
   NestInterceptor,
-  ExecutionContext,
-  CallHandler,
 } from '@nestjs/common';
-import { ApiProperty } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-export class ResponseFormat<T> {
-  @ApiProperty()
-  isArray: boolean;
-  @ApiProperty()
-  path: string;
-  @ApiProperty()
-  duration: string;
-  @ApiProperty()
-  method: string;
-
-  data: T;
-}
+import { tap } from 'rxjs/operators';
+import { LoggerService } from '../logger/logger.service';
 
 @Injectable()
-export class ResponseInterceptor<T>
-  implements NestInterceptor<T, ResponseFormat<T>>
-{
-  intercept(
-    context: ExecutionContext,
-    next: CallHandler,
-  ): Observable<ResponseFormat<T>> {
+export class LoggingInterceptor implements NestInterceptor {
+  constructor(private readonly logger: LoggerService) {}
+
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const now = Date.now();
     const httpContext = context.switchToHttp();
     const request = httpContext.getRequest();
 
-    return next.handle().pipe(
-      map((data) => ({
-        data,
-        isArray: Array.isArray(data),
-        path: request.path,
-        duration: `${Date.now() - now}ms`,
-        method: request.method,
-      })),
+    const ip = this.getIP(request);
+
+    this.logger.log(
+      `Incoming Request on ${request.path}`,
+      `method=${request.method} ip=${ip}`,
     );
+
+    return next.handle().pipe(
+      tap(() => {
+        this.logger.log(
+          `End Request for ${request.path}`,
+          `method=${request.method} ip=${ip} duration=${Date.now() - now}ms`,
+        );
+      }),
+    );
+  }
+
+  private getIP(request: any): string {
+    let ip: string;
+    const ipAddr = request.headers['x-forwarded-for'];
+    if (ipAddr) {
+      const list = ipAddr.split(',');
+      ip = list[list.length - 1];
+    } else {
+      ip = request.connection.remoteAddress;
+    }
+    return ip.replace('::ffff:', '');
   }
 }

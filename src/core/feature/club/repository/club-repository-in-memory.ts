@@ -1,6 +1,8 @@
 import { ClubRepository } from './club.repository';
 import ClubModel from '../entity/club.model';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export default class ClubRepositoryInMemory implements ClubRepository {
   private clubDatas: ClubModel[] = [
     { id: '1', name: 'club name 1' },
