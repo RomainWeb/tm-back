@@ -64,6 +64,12 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleNameMapper": {
+      "^@club(.*)$": "<rootDir>/core/feature/club$1",
+      "^@enums(.*)$": "<rootDir>/enums$1",
+      "^@domain(.*)$": "<rootDir>/domain$1",
+      "^@infrastructure(.*)$": "<rootDir>/infrastructure$1"
+    },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],

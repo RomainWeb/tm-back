@@ -1,14 +1,13 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import GetAllClubsUseCase from '@club/usecase/get-all-clubs.usecase';
-import ClubModel from '@club/entity/club.model';
-import { of } from 'rxjs';
+import ClubEntity from '@club/domain/entities/club.entity';
 
 @Controller('clubs')
 export class ClubController {
   constructor(private getAllClubsUseCase: GetAllClubsUseCase) {}
 
   @Get()
-  findAll(): Promise<ClubModel[]> {
+  findAll(): Promise<ClubEntity[]> {
     return this.getAllClubsUseCase.execute();
   }
 

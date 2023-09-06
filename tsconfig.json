@@ -22,6 +22,7 @@
       "@domain/*": ["src/domain/*"],
       "@useCases/*": ["src/usecases/*"],
       "@infrastructure/*": ["src/infrastructure/*"],
+      "@enums/*": ["src/enums/*"]
     }
   },
 }
