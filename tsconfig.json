@@ -18,11 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@club/*": ["src/core/feature/club/*"],
       "@domain/*": ["src/domain/*"],
-      "@useCases/*": ["src/usecases/*"],
       "@infrastructure/*": ["src/infrastructure/*"],
-      "@enums/*": ["src/enums/*"]
+      "@application/*": ["src/application/*"],
+      "@presentation/*": ["src/presentation/*"]
     }
   },
 }

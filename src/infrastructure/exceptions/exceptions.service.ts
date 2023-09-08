@@ -8,7 +8,7 @@ import {
 import {
   IException,
   IFormatExceptionMessage,
-} from '@domain/exceptions.interface';
+} from '../../application/ports/exceptions/exceptions.interface';
 
 @Injectable()
 export class ExceptionsService implements IException {
