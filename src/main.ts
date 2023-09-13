@@ -4,8 +4,10 @@ import { AllExceptionFilter } from '@infrastructure/common/exception.filter';
 import { LoggerService } from '@infrastructure/logger/logger.service';
 import { LoggingInterceptor } from '@infrastructure/common/logger.interceptor';
 import { ResponseInterceptor } from '@infrastructure/common/response.interceptor';
+import * as dotenv from 'dotenv';
 
 async function bootstrap() {
+  dotenv.config();
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.useGlobalFilters(new AllExceptionFilter(new LoggerService()));
