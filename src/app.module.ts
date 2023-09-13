@@ -3,6 +3,7 @@ import { LoggerModule } from '@infrastructure/logger/logger.module';
 import { ExceptionsModule } from '@infrastructure/exceptions/exceptions.module';
 import { ClubModule } from '@infrastructure/ioc/club/club.module';
 import { EnvironmentConfigModule } from '@infrastructure/config/environment-config/environment-config.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { EnvironmentConfigModule } from '@infrastructure/config/environment-conf
     LoggerModule,
     ExceptionsModule,
     ClubModule,
+    TypeOrmModule,
   ],
   controllers: [],
 })
