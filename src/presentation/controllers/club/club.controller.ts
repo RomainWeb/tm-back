@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { FindOneClubByIdUseCase } from '@application/useCases/club/findOneClubById.useCase';
-import { ClubEntity } from '@domain/entities/club.entity';
+import { FindOneClubByIdUseCase } from '@domain/club/usecase/findOneClubById.useCase';
+import { ClubEntity } from '@domain/club/entities/club.entity';
 
 @Controller('club')
 export class ClubController {

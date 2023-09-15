@@ -1,4 +1,4 @@
-import { ClubEntity } from '@domain/entities/club.entity';
+import { ClubEntity } from '@domain/club/entities/club.entity';
 
 export class UserEntity {
   private _id: number;

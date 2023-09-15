@@ -1,7 +1,7 @@
-import { ClubRepository } from '@application/ports/club/club.repository';
+import { ClubRepositoryPort } from '@application/ports/club/clubRepository.port';
 import { InMemoryClubAdapter } from '@infrastructure/club/adapters/inMemoryClub.adapter';
-import { FindOneClubByIdUseCase } from '@application/useCases/club/findOneClubById.useCase';
-import { ClubEntity } from '@domain/entities/club.entity';
+import { FindOneClubByIdUseCase } from '@domain/club/usecase/findOneClubById.useCase';
+import { ClubEntity } from '@domain/club/entities/club.entity';
 
 describe('find one club by id use case', () => {
   it('should return null when not found a club with id', (done) => {
@@ -15,7 +15,7 @@ describe('find one club by id use case', () => {
       '30310 vergèze',
       2,
     );
-    const clubRepository: ClubRepository = new InMemoryClubAdapter();
+    const clubRepository: ClubRepositoryPort = new InMemoryClubAdapter();
     const findOneClubByIdUseCase: FindOneClubByIdUseCase =
       new FindOneClubByIdUseCase(clubRepository);
 

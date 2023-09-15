@@ -1,23 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ClubController } from './club.controller';
-import { FindOneClubByIdUseCase } from '@application/useCases/club/findOneClubById.useCase';
-import { ClubRepository } from '@application/ports/club/club.repository';
+import { FindOneClubByIdUseCase } from '@domain/club/usecase/findOneClubById.useCase';
+import { ClubRepositoryPort } from '@application/ports/club/clubRepository.port';
 import { InMemoryClubAdapter } from '@infrastructure/club/adapters/inMemoryClub.adapter';
 
 describe('ClubController', () => {
   let controller: ClubController;
-  const findOneClubByIdUseCase = (clubRepository: ClubRepository) =>
+  const findOneClubByIdUseCase = (clubRepository: ClubRepositoryPort) =>
     new FindOneClubByIdUseCase(clubRepository);
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ClubController],
       providers: [
-        { provide: ClubRepository, useClass: InMemoryClubAdapter },
+        { provide: ClubRepositoryPort, useClass: InMemoryClubAdapter },
         {
           provide: FindOneClubByIdUseCase,
           useFactory: findOneClubByIdUseCase,
-          inject: [ClubRepository],
+          inject: [ClubRepositoryPort],
         },
       ],
     }).compile();

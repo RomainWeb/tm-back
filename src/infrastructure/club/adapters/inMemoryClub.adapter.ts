@@ -1,8 +1,8 @@
-import { ClubRepository } from '@application/ports/club/club.repository';
-import { ClubEntity } from '@domain/entities/club.entity';
-import { ClubList } from '@infrastructure/club/mock/clubList';
+import { ClubRepositoryPort } from '@application/ports/club/clubRepository.port';
+import { ClubEntity } from '@domain/club/entities/club.entity';
+import { ClubList } from '../../../test/mock/clubList';
 
-export class InMemoryClubAdapter implements ClubRepository {
+export class InMemoryClubAdapter implements ClubRepositoryPort {
   constructor() {}
 
   findOneClubById(clubId: number): Promise<ClubEntity> {

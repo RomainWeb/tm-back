@@ -1,4 +1,4 @@
-import { SportTypeEnum } from '@domain/enums/sportType.enum';
+import { SportTypeEnum } from '../../../common/enums/sportType.enum';
 
 export class ClubEntity {
   _id?: number;

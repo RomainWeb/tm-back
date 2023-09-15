@@ -17,12 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config src/test/jest-e2e.json",
-    "typeorm": "ts-node ./node_modules/typeorm/cli",
-    "migration:run": "npm run typeorm migration:run -- -d ./src/infrastructure/config/typeorm/typeorm.config.ts",
-    "migration:generate": "npm run typeorm -- -d ./src/infrastructure/config/typeorm/typeorm.config.ts migration:generate ./src/migrations/$npm_config_name",
-    "migration:create": "npm run typeorm -- migration:create ./src/migrations/$npm_config_name",
-    "migration:revert": "npm run typeorm -- -d ./src/infrastructure/config/typeorm/typeorm.config.ts migration:revert"
+    "test:e2e": "jest --config src/test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -71,7 +66,7 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "moduleNameMapper": {
-      "^@domain(.*)$": "<rootDir>/domain$1",
+      "^@domain(.*)$": "<rootDir>/core/domain$1",
       "^@infrastructure(.*)$": "<rootDir>/infrastructure$1",
       "^@application(.*)$": "<rootDir>/application$1",
       "^@presentation(.*)$": "<rootDir>/presentation$1"
