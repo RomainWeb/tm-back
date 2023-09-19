@@ -7,6 +7,6 @@ export class PrismaTimeSlotAdapter
   implements TimeSlotPort
 {
   findAll(userId: number): Promise<TimeSlotEntity[]> {
-    return this.timeSlots.findMany();
+    return this.timeSlots.findMany({ where: { userId } });
   }
 }

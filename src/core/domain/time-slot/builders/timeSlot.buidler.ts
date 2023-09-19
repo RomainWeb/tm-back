@@ -7,6 +7,7 @@ export class TimeSlotBuilder {
   private _endDate!: Date;
   private _description!: string;
   private _status!: TimeSlotStatusEnum;
+  private _userId: number;
 
   withId(value: number): TimeSlotBuilder {
     this._id = value;
@@ -33,6 +34,11 @@ export class TimeSlotBuilder {
     return this;
   }
 
+  withUserId(value: number): TimeSlotBuilder {
+    this._userId = value;
+    return this;
+  }
+
   get id(): number {
     return this._id;
   }
@@ -51,6 +57,10 @@ export class TimeSlotBuilder {
 
   get status(): TimeSlotStatusEnum {
     return this._status;
+  }
+
+  get userId(): number {
+    return this._userId;
   }
 
   build(): TimeSlotEntity {
