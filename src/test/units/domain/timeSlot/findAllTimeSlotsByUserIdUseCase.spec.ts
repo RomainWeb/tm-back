@@ -1,7 +1,7 @@
-import { TimeSlotPort } from '@application/ports/time-slot/timeSlot.port';
+import { TimeSlotPort } from '@domain/time-slot/ports/timeSlot.port';
 import { InMemoryTimeSlotAdapter } from '@infrastructure/data/time-slot/adapters/inMemoryTimeSlot.adapter';
 import { FindAllTimeSlotByUserIdUseCase } from '@domain/time-slot/usecase/findAllTimeSlotByUserId.useCase';
-import { TIME_SLOT_MOCK_LIST } from '../../mock/timeSlotList.mock';
+import { TIME_SLOT_MOCK_LIST } from '../../../mock/timeSlotList.mock';
 
 describe('find all time slots by user id', () => {
   it('should return a list of time slots with user id on params', (done) => {

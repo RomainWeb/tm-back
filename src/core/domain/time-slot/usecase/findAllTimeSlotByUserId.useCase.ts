@@ -1,6 +1,6 @@
 import { TimeSlotEntity } from '@domain/time-slot/entities/timeSlot.entity';
 import { Inject } from '@nestjs/common';
-import { TimeSlotPort } from '@application/ports/time-slot/timeSlot.port';
+import { TimeSlotPort } from '@domain/time-slot/ports/timeSlot.port';
 
 export class FindAllTimeSlotByUserIdUseCase {
   constructor(@Inject() private timeSlotPort: TimeSlotPort) {}

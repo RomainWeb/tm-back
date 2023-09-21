@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EnvironmentConfigModule } from '@infrastructure/config/environment-config/environment-config.module';
-import { TimeSlotPort } from '@application/ports/time-slot/timeSlot.port';
+import { TimeSlotPort } from '@domain/time-slot/ports/timeSlot.port';
 import { FindAllTimeSlotByUserIdUseCase } from '@domain/time-slot/usecase/findAllTimeSlotByUserId.useCase';
 import { TimeSlotController } from '@presentation/controllers/time-slot/timeSlot.controller';
 import { PrismaTimeSlotAdapter } from '@infrastructure/data/time-slot/adapters/prismaTimeSlot.adapter';
