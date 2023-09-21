@@ -35,7 +35,7 @@ export class AllExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toISOString(),
         path: request.url,
       },
-      ...message,
+      message,
     };
 
     this.logMessage(request, message, status, exception);

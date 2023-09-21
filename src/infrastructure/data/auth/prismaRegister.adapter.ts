@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '@infrastructure/services/prisma/prisma.service';
 import { RegisterRequestDto } from '@presentation/dtos/auth/registerRequest.dto';
 import { RegisterPort } from '@domain/auth/ports/register.port';
+import { RegisterResponseDto } from '@presentation/dtos/auth/registerResponse.dto';
 
 @Injectable()
 export class PrismaRegisterAdapter implements RegisterPort {
@@ -12,7 +13,7 @@ export class PrismaRegisterAdapter implements RegisterPort {
     private jwtService: JwtService,
   ) {}
 
-  async register(data: RegisterRequestDto) {
+  async register(data: RegisterRequestDto): Promise<RegisterResponseDto> {
     const checkUserExists = await this.prisma.users.findFirst({
       where: {
         email: data.email,
@@ -28,7 +29,7 @@ export class PrismaRegisterAdapter implements RegisterPort {
     if (createUser) {
       return {
         statusCode: 200,
-        message: 'Register Successfull',
+        message: 'Register Successfully',
       };
     }
   }

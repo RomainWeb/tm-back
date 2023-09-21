@@ -5,6 +5,7 @@ import { LoginPort } from '@domain/auth/ports/login.port';
 import { LoginRequestDto } from '@presentation/dtos/auth/loginRequest.dto';
 import { compare } from 'bcrypt';
 import { EnvironmentConfigService } from '@infrastructure/config/environment-config/environment-config.service';
+import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
 
 @Injectable()
 export class PrismaLoginAdapter implements LoginPort {
@@ -14,7 +15,7 @@ export class PrismaLoginAdapter implements LoginPort {
     private environmentConfigService: EnvironmentConfigService,
   ) {}
 
-  async login(data: LoginRequestDto) {
+  async login(data: LoginRequestDto): Promise<LoginResponseDto> {
     const checkUserExists = await this.prisma.users.findFirst({
       where: {
         email: data.email,
@@ -39,7 +40,7 @@ export class PrismaLoginAdapter implements LoginPort {
 
       return {
         statusCode: 200,
-        message: 'Login success',
+        message: 'Login successfully',
         accessToken: accessToken,
       };
     } else {
