@@ -7,17 +7,23 @@ import * as process from 'process';
 import { JwtStrategy } from '@infrastructure/config/auth/jwt.strategy';
 import { AuthController } from '@presentation/controllers/auth/auth.controller';
 import { RegisterPort } from '@domain/auth/ports/register.port';
-import { PrismaRegisterAdapter } from '@infrastructure/data/auth/prismaRegister.adapter';
 import { RegisterUserUseCase } from '@domain/auth/usecase/registerUser.useCase';
 import { LoginPort } from '@domain/auth/ports/login.port';
-import { LoginUseUseCase } from '@domain/auth/usecase/loginUse.useCase';
+import { LoginUserUseCase } from '@domain/auth/usecase/loginUser.useCase';
+import { ProfilePort } from '@domain/auth/ports/profile.port';
+import { ProfileUserUseCase } from '@domain/auth/usecase/profileUser.useCase';
+import { PrismaProfileAdapter } from '@infrastructure/data/auth/prismaProfile.adapter';
+import { PrismaRegisterAdapter } from '@infrastructure/data/auth/prismaRegister.adapter';
 import { PrismaLoginAdapter } from '@infrastructure/data/auth/prismaLogin.adapter';
 
 const registerUserUseCase = (registerPort: RegisterPort) =>
   new RegisterUserUseCase(registerPort);
 
 const loginUserUseCase = (loginPort: LoginPort) =>
-  new LoginUseUseCase(loginPort);
+  new LoginUserUseCase(loginPort);
+
+const profileUserUseCase = (profilePort: ProfilePort) =>
+  new ProfileUserUseCase(profilePort);
 
 @Module({
   imports: [
@@ -39,15 +45,21 @@ const loginUserUseCase = (loginPort: LoginPort) =>
   providers: [
     { provide: RegisterPort, useClass: PrismaRegisterAdapter },
     { provide: LoginPort, useClass: PrismaLoginAdapter },
+    { provide: ProfilePort, useClass: PrismaProfileAdapter },
     {
       provide: RegisterUserUseCase,
       useFactory: registerUserUseCase,
       inject: [RegisterPort],
     },
     {
-      provide: LoginUseUseCase,
+      provide: LoginUserUseCase,
       useFactory: loginUserUseCase,
       inject: [LoginPort],
+    },
+    {
+      provide: ProfileUserUseCase,
+      useFactory: profileUserUseCase,
+      inject: [ProfilePort],
     },
     JwtStrategy,
   ],
