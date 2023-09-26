@@ -6,6 +6,7 @@ import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
 import { LoginUserUseCase } from '@domain/auth/usecase/loginUser.useCase';
 import { AuthGuard } from '@application/guard/auth.guard';
 import { ProfileUserUseCase } from '@domain/auth/usecase/profileUser.useCase';
+import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -27,7 +28,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('profile')
-  async profile(@Req() req) {
-    return await this.profileUserUseCase.execute(req.id);
+  async profile(@Body() data: { email: string }): Promise<ProfileResponseDto> {
+    return await this.profileUserUseCase.execute(data.email);
   }
 }

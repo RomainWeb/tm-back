@@ -6,6 +6,12 @@ export class ProfileResponseDto {
   name: string;
 
   @IsNotEmpty()
+  display_name: string;
+
+  @IsNotEmpty()
+  id: string;
+
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 }

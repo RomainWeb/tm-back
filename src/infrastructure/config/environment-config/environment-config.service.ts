@@ -45,7 +45,7 @@ export class EnvironmentConfigService {
     return +this.nestConfig.get<number>('JWT_EXPIRATION_TIME');
   }
 
-  get JwtRefreshExpirationTime(): string {
-    return this.nestConfig.get<string>('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
+  get JwtRefreshExpirationTime(): number {
+    return this.nestConfig.get<number>('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
   }
 }

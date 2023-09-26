@@ -15,6 +15,7 @@ import { ProfileUserUseCase } from '@domain/auth/usecase/profileUser.useCase';
 import { PrismaProfileAdapter } from '@infrastructure/data/auth/prismaProfile.adapter';
 import { PrismaRegisterAdapter } from '@infrastructure/data/auth/prismaRegister.adapter';
 import { PrismaLoginAdapter } from '@infrastructure/data/auth/prismaLogin.adapter';
+import { RefreshTokenStrategy } from '@infrastructure/config/auth/refreshJwt.strategy';
 
 const registerUserUseCase = (registerPort: RegisterPort) =>
   new RegisterUserUseCase(registerPort);
@@ -62,6 +63,7 @@ const profileUserUseCase = (profilePort: ProfilePort) =>
       inject: [ProfilePort],
     },
     JwtStrategy,
+    RefreshTokenStrategy,
   ],
 })
 export class AuthModule {}

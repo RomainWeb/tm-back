@@ -32,16 +32,31 @@ export class PrismaLoginAdapter implements LoginPort {
     );
 
     if (checkPassword) {
-      const accessToken = this.generateJWT({
-        sub: checkUserExists.id,
-        name: checkUserExists.name,
-        email: checkUserExists.email,
-      });
+      const accessToken = this.generateJWT(
+        {
+          sub: checkUserExists.id,
+          name: checkUserExists.name,
+          email: checkUserExists.email,
+        },
+        this.environmentConfigService.JwtSecret,
+        this.environmentConfigService.JwtExpirationTime,
+      );
+
+      const refreshToken = this.generateJWT(
+        {
+          sub: checkUserExists.id,
+          name: checkUserExists.name,
+          email: checkUserExists.email,
+        },
+        this.environmentConfigService.JwtSecretRefresh,
+        this.environmentConfigService.JwtRefreshExpirationTime,
+      );
 
       return {
         statusCode: 200,
         message: 'Login successfully',
         accessToken: accessToken,
+        refreshToken: refreshToken,
       };
     } else {
       throw new HttpException(
@@ -51,10 +66,10 @@ export class PrismaLoginAdapter implements LoginPort {
     }
   }
 
-  generateJWT(payload: any) {
+  generateJWT(payload: any, secret: string, expiresIn: number) {
     return this.jwtService.sign(payload, {
-      secret: this.environmentConfigService.JwtSecret,
-      expiresIn: this.environmentConfigService.JwtExpirationTime,
+      secret: secret,
+      expiresIn: expiresIn,
     });
   }
 }

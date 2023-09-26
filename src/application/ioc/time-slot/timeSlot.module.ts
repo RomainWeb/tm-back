@@ -4,9 +4,13 @@ import { TimeSlotPort } from '@domain/time-slot/ports/timeSlot.port';
 import { FindAllTimeSlotByUserIdUseCase } from '@domain/time-slot/usecase/findAllTimeSlotByUserId.useCase';
 import { TimeSlotController } from '@presentation/controllers/time-slot/timeSlot.controller';
 import { PrismaTimeSlotAdapter } from '@infrastructure/data/time-slot/adapters/prismaTimeSlot.adapter';
+import { CreateTimeSlotUseCase } from '@domain/time-slot/usecase/createTimeSlot.useCase';
 
 const findAllTimeSlotByUserIdUseCase = (timeSlotPort: TimeSlotPort) =>
   new FindAllTimeSlotByUserIdUseCase(timeSlotPort);
+
+const createTimeSlotUseCase = (timeSlotPort: TimeSlotPort) =>
+  new CreateTimeSlotUseCase(timeSlotPort);
 
 // const inMemoryTimeSlotAdapterFactory = () =>
 //   new InMemoryTimeSlotAdapter(TIME_SLOT_MOCK_LIST);
@@ -19,6 +23,11 @@ const findAllTimeSlotByUserIdUseCase = (timeSlotPort: TimeSlotPort) =>
     {
       provide: FindAllTimeSlotByUserIdUseCase,
       useFactory: findAllTimeSlotByUserIdUseCase,
+      inject: [TimeSlotPort],
+    },
+    {
+      provide: CreateTimeSlotUseCase,
+      useFactory: createTimeSlotUseCase,
       inject: [TimeSlotPort],
     },
   ],

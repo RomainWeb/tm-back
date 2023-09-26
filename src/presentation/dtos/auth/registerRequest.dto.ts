@@ -16,6 +16,10 @@ export class RegisterRequestDto {
   email: string;
 
   @IsNotEmpty()
+  @IsEmail()
+  display_name: string;
+
+  @IsNotEmpty()
   @IsString()
   @MinLength(6)
   @MaxLength(20)

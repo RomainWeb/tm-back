@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class LoginResponseDto {
   @IsNotEmpty()
@@ -6,10 +6,11 @@ export class LoginResponseDto {
   statusCode: number;
 
   @IsNotEmpty()
-  @IsEmail()
   message: string;
 
   @IsNotEmpty()
-  @IsEmail()
   accessToken: string;
+
+  @IsNotEmpty()
+  refreshToken: string;
 }

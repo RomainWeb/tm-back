@@ -2,14 +2,15 @@ import { TimeSlotEntity } from '@domain/time-slot/entities/timeSlot.entity';
 import { TimeSlotStatusEnum } from '../../../common/enums/timeSlotsStatus.enum';
 
 export class TimeSlotBuilder {
-  private _id!: number;
+  private _id!: string;
+  private _name: string;
   private _startDate!: Date;
   private _endDate!: Date;
   private _description!: string;
   private _status!: TimeSlotStatusEnum;
-  private _userId: number;
+  private _userId: string;
 
-  withId(value: number): TimeSlotBuilder {
+  withId(value: string): TimeSlotBuilder {
     this._id = value;
     return this;
   }
@@ -34,12 +35,17 @@ export class TimeSlotBuilder {
     return this;
   }
 
-  withUserId(value: number): TimeSlotBuilder {
+  withName(value: string): TimeSlotBuilder {
+    this._name = value;
+    return this;
+  }
+
+  withUserId(value: string): TimeSlotBuilder {
     this._userId = value;
     return this;
   }
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
@@ -59,7 +65,11 @@ export class TimeSlotBuilder {
     return this._status;
   }
 
-  get userId(): number {
+  get name(): string {
+    return this._name;
+  }
+
+  get userId(): string {
     return this._userId;
   }
 

@@ -39,6 +39,7 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.1.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
@@ -91,6 +92,8 @@
   "prisma": {
     "schema": "src/infrastructure/config/prisma/schema.prisma",
     "migrate": "npx prisma migrate dev",
+    "reset": "npx prisma migrate reset",
+    "deploy": "npx prisma migrate deploy",
     "seed": "ts-node src/infrastructure/config/prisma/seeds/seed.ts"
   }
 }

@@ -7,14 +7,16 @@ import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto'
 export class PrismaProfileAdapter implements ProfilePort {
   constructor(private prisma: PrismaService) {}
 
-  async profile(userId: number): Promise<ProfileResponseDto> {
+  async profile(email: string): Promise<ProfileResponseDto> {
     return this.prisma.users.findFirst({
       where: {
-        id: userId,
+        email: email,
       },
       select: {
         name: true,
         email: true,
+        display_name: true,
+        id: true,
       },
     });
   }

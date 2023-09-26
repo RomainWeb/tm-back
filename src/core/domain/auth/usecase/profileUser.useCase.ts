@@ -5,7 +5,7 @@ import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto'
 export class ProfileUserUseCase {
   constructor(@Inject() private profilePort: ProfilePort) {}
 
-  execute(userId: number): Promise<ProfileResponseDto> {
-    return this.profilePort.profile(userId);
+  execute(email: string): Promise<ProfileResponseDto> {
+    return this.profilePort.profile(email);
   }
 }
