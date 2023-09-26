@@ -1,12 +1,20 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { RegisterRequestDto } from '@presentation/dtos/auth/registerRequest.dto';
 import { RegisterUserUseCase } from '@domain/auth/usecase/registerUser.useCase';
 import { LoginRequestDto } from '@presentation/dtos/auth/loginRequest.dto';
 import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
 import { LoginUserUseCase } from '@domain/auth/usecase/loginUser.useCase';
-import { AuthGuard } from '@application/guard/auth.guard';
+import { JwtAuthGuard } from '@application/guard/jwtAuth.guard';
 import { ProfileUserUseCase } from '@domain/auth/usecase/profileUser.useCase';
 import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto';
+import { ProfileRequestDto } from '@presentation/dtos/auth/profileRequest.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -26,9 +34,11 @@ export class AuthController {
     return await this.loginUserUseCase.execute(data);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
-  async profile(@Body() data: { email: string }): Promise<ProfileResponseDto> {
-    return await this.profileUserUseCase.execute(data.email);
+  async profile(
+    @Request() req: { user: ProfileRequestDto },
+  ): Promise<ProfileResponseDto> {
+    return await this.profileUserUseCase.execute(req.user.email);
   }
 }

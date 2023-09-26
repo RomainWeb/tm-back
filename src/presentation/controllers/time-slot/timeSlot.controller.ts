@@ -1,11 +1,18 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+  Request,
+  Get,
+} from '@nestjs/common';
 import { FindAllTimeSlotByUserIdUseCase } from '@domain/time-slot/usecase/findAllTimeSlotByUserId.useCase';
-import { TimeSlotEntity } from '@domain/time-slot/entities/timeSlot.entity';
-import { AuthGuard } from '@application/guard/auth.guard';
+import { JwtAuthGuard } from '@application/guard/jwtAuth.guard';
 import { CreateTimeSlotRequestDto } from '@presentation/dtos/time-slot/createTimeSlotRequest.dto';
 import { CreateTimeSlotResponseDto } from '@presentation/dtos/time-slot/createTimeSlotResponse.dto';
 import { CreateTimeSlotUseCase } from '@domain/time-slot/usecase/createTimeSlot.useCase';
 import { FindAllTimeSlotsResponseDto } from '@presentation/dtos/time-slot/findAllTimeSlotsResponse.dto';
+import { ProfileRequestDto } from '@presentation/dtos/auth/profileRequest.dto';
 
 @Controller('time-slot')
 export class TimeSlotController {
@@ -14,15 +21,15 @@ export class TimeSlotController {
     private createTimeSlotUseCase: CreateTimeSlotUseCase,
   ) {}
 
-  @UseGuards(AuthGuard)
-  @Get(':userId')
+  @UseGuards(JwtAuthGuard)
+  @Get()
   async findAll(
-    @Param('userId') userId: string,
+    @Request() req: { user: ProfileRequestDto },
   ): Promise<FindAllTimeSlotsResponseDto[]> {
-    return await this.findAllTimeSlotByUserIdUseCase.execute(userId);
+    return await this.findAllTimeSlotByUserIdUseCase.execute(req.user.id);
   }
 
-  @UseGuards(AuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Body() timSlot: CreateTimeSlotRequestDto,
