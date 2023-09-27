@@ -11,9 +11,11 @@ describe('find all time slots by user id', () => {
     const findAllTimeSlotsByUserId: FindAllTimeSlotByUserIdUseCase =
       new FindAllTimeSlotByUserIdUseCase(timeSlotPort);
 
-    findAllTimeSlotsByUserId.execute(2).then((result) => {
-      expect(result).toEqual(TIME_SLOT_MOCK_LIST);
-      done();
-    });
+    findAllTimeSlotsByUserId
+      .execute('1504d380-c058-488b-a10e-b42523de95fe')
+      .then((result) => {
+        expect(result).toEqual(TIME_SLOT_MOCK_LIST);
+        done();
+      });
   });
 });

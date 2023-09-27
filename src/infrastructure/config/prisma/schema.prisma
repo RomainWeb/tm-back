@@ -25,10 +25,27 @@ model time_slots {
   description String
   start_at    DateTime
   end_at      DateTime
-  status      Int
+  status      TimeslotStatusEnum
   created_at  DateTime         @default(now())
   updated_at  DateTime?        @updatedAt
   deleted_at  DateTime?        @updatedAt
+  day         DaysEnum
   userId      String
   user        users            @relation(fields: [userId], references: [id])
+}
+
+enum TimeslotStatusEnum {
+  Undecided
+  Completed
+  Canceled
+}
+
+enum DaysEnum {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
 }

@@ -79,6 +79,7 @@
     },
     "moduleNameMapper": {
       "^@domain(.*)$": "<rootDir>/core/domain$1",
+      "^@core(.*)$": "<rootDir>/core$1",
       "^@infrastructure(.*)$": "<rootDir>/infrastructure$1",
       "^@application(.*)$": "<rootDir>/application$1",
       "^@presentation(.*)$": "<rootDir>/presentation$1"

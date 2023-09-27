@@ -2,7 +2,6 @@ import { UserDataEntity } from '@infrastructure/data/user/entities/userData.enti
 
 export const UsersListSeed: UserDataEntity[] = [
   {
-    id: '8e3399e6-1d94-11ec-9621-0242ac130002',
     email: 'yann@gmail.com',
     display_name: 'yann pseudo',
     name: 'Yann name',
@@ -14,7 +13,6 @@ export const UsersListSeed: UserDataEntity[] = [
     updated_at: null,
   },
   {
-    id: '9371f314-1c93-11ec-9621-0242ac130002',
     email: 'romain@gmail.com',
     display_name: 'romain pseudo',
     name: 'romain name',

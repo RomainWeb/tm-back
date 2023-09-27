@@ -1,5 +1,6 @@
 import { TimeSlotEntity } from '@domain/time-slot/entities/timeSlot.entity';
 import { TimeSlotStatusEnum } from '../../../common/enums/timeSlotsStatus.enum';
+import { DaysEnum } from '../../../common/enums/days.enum';
 
 export class TimeSlotBuilder {
   private _id!: string;
@@ -9,6 +10,7 @@ export class TimeSlotBuilder {
   private _description!: string;
   private _status!: TimeSlotStatusEnum;
   private _userId: string;
+  private _day: DaysEnum;
 
   withId(value: string): TimeSlotBuilder {
     this._id = value;
@@ -45,6 +47,11 @@ export class TimeSlotBuilder {
     return this;
   }
 
+  withDay(value: DaysEnum): TimeSlotBuilder {
+    this._day = value;
+    return this;
+  }
+
   get id(): string {
     return this._id;
   }
@@ -71,6 +78,10 @@ export class TimeSlotBuilder {
 
   get userId(): string {
     return this._userId;
+  }
+
+  get day(): DaysEnum {
+    return this._day;
   }
 
   build(): TimeSlotEntity {

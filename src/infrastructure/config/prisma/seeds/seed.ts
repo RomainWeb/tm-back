@@ -20,19 +20,9 @@ async function main() {
           ...user,
           password: pwd,
           time_slots: {
-            create: [],
+            create: TimeSlotListSeed,
           },
         },
-      }),
-    ),
-  );
-
-  await Promise.all(
-    TimeSlotListSeed.map(async (timeSlot: TimeSlotDataEntity) =>
-      prisma.time_slots.upsert({
-        where: { id: timeSlot.id },
-        update: {},
-        create: { ...timeSlot },
       }),
     ),
   );

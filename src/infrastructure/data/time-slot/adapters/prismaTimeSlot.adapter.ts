@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import { CreateTimeSlotRequestDto } from '@presentation/dtos/time-slot/createTimeSlotRequest.dto';
 import { CreateTimeSlotResponseDto } from '@presentation/dtos/time-slot/createTimeSlotResponse.dto';
 import { FindAllTimeSlotsResponseDto } from '@presentation/dtos/time-slot/findAllTimeSlotsResponse.dto';
+import { TimeSlotStatusEnum } from '../../../../core/common/enums/timeSlotsStatus.enum';
+import { DaysEnum } from '../../../../core/common/enums/days.enum';
 
 export class PrismaTimeSlotAdapter
   extends PrismaClient
@@ -13,11 +15,12 @@ export class PrismaTimeSlotAdapter
     return timeSlots.map((timeSlot) => {
       return {
         id: timeSlot.id,
-        status: timeSlot.status,
+        status: TimeSlotStatusEnum[timeSlot.status],
         name: timeSlot.name,
         description: timeSlot.description,
         startDate: timeSlot.start_at,
         endDate: timeSlot.end_at,
+        day: DaysEnum[timeSlot.day],
       };
     });
   }
@@ -28,7 +31,8 @@ export class PrismaTimeSlotAdapter
     const newTimeSlot = await this.time_slots.create({
       data: {
         name: data.name,
-        status: data.status,
+        status: TimeSlotStatusEnum[data.status],
+        day: DaysEnum[data.day],
         start_at: new Date(data.startDate),
         end_at: new Date(data.endDate),
         description: data.description,
@@ -41,11 +45,12 @@ export class PrismaTimeSlotAdapter
 
     return Promise.resolve({
       id: newTimeSlot.id,
-      status: newTimeSlot.status,
+      status: TimeSlotStatusEnum[newTimeSlot.status],
       name: newTimeSlot.name,
       description: newTimeSlot.description,
       startDate: newTimeSlot.start_at,
       endDate: newTimeSlot.end_at,
+      day: DaysEnum[newTimeSlot.day],
     });
   }
 }

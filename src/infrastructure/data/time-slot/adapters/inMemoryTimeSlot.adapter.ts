@@ -19,6 +19,7 @@ export class InMemoryTimeSlotAdapter implements TimeSlotPort {
       status: data.status,
       startDate: new Date(data.startDate),
       description: data.description,
+      day: data.day,
     });
   }
 }

@@ -1,5 +1,6 @@
 import { TimeSlotStatusEnum } from '../../../common/enums/timeSlotsStatus.enum';
 import { TimeSlotBuilder } from '@domain/time-slot/builders/timeSlot.buidler';
+import { DaysEnum } from '../../../common/enums/days.enum';
 
 export class TimeSlotEntity {
   id: string;
@@ -9,6 +10,7 @@ export class TimeSlotEntity {
   status: TimeSlotStatusEnum;
   userId: string;
   name: string;
+  day: DaysEnum;
 
   constructor(builder: TimeSlotBuilder) {
     this.id = builder.id;
@@ -18,5 +20,6 @@ export class TimeSlotEntity {
     this.description = builder.description;
     this.status = builder.status;
     this.userId = builder.userId;
+    this.day = builder.day;
   }
 }
