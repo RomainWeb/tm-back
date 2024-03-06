@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@infrastructure/services/prisma/prisma.service';
 import { ProfilePort } from '@domain/auth/ports/profile.port';
-import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto';
+import { ProfileResponseDto } from '@infrastructure/data/auth/dtos/profileResponse.dto';
 
 @Injectable()
 export class PrismaProfileAdapter implements ProfilePort {
@@ -13,7 +13,6 @@ export class PrismaProfileAdapter implements ProfilePort {
         email: email,
       },
       select: {
-        name: true,
         email: true,
         display_name: true,
         id: true,

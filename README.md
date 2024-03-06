@@ -45,6 +45,14 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+## Prisma
+```bash
+# generate prisma client
+$ prisma migrate dev --name init
+$ yarn run prisma migrate
+$ npx prisma db seed
+```
+
 ## Test
 
 ```bash

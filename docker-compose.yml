@@ -5,7 +5,7 @@ services:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_DB=yetiti_db
+      - POSTGRES_DB=tm_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     container_name: postgres-db

@@ -2,8 +2,6 @@ import { PrismaClient } from '@prisma/client';
 import { UsersListSeed } from './users.seed';
 import { UserDataEntity } from '@infrastructure/data/user/entities/userData.entity';
 import * as bcrypt from 'bcrypt';
-import { TimeSlotListSeed } from './timeSlots.seed';
-import { TimeSlotDataEntity } from '@infrastructure/data/time-slot/entities/timeSlot.entity';
 
 // initialize Prisma Client
 const prisma = new PrismaClient();
@@ -19,9 +17,6 @@ async function main() {
         create: {
           ...user,
           password: pwd,
-          time_slots: {
-            create: TimeSlotListSeed,
-          },
         },
       }),
     ),

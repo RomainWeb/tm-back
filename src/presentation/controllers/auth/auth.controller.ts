@@ -6,15 +6,15 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { RegisterRequestDto } from '@presentation/dtos/auth/registerRequest.dto';
+import { RegisterRequestDto } from '@infrastructure/data/auth/dtos/registerRequest.dto';
 import { RegisterUserUseCase } from '@domain/auth/usecase/registerUser.useCase';
-import { LoginRequestDto } from '@presentation/dtos/auth/loginRequest.dto';
-import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
+import { LoginRequestDto } from '@infrastructure/data/auth/dtos/loginRequest.dto';
+import { LoginResponseDto } from '@infrastructure/data/auth/dtos/loginResponse.dto';
 import { LoginUserUseCase } from '@domain/auth/usecase/loginUser.useCase';
 import { JwtAuthGuard } from '@application/guard/jwtAuth.guard';
 import { ProfileUserUseCase } from '@domain/auth/usecase/profileUser.useCase';
-import { ProfileResponseDto } from '@presentation/dtos/auth/profileResponse.dto';
-import { ProfileRequestDto } from '@presentation/dtos/auth/profileRequest.dto';
+import { ProfileResponseDto } from '@infrastructure/data/auth/dtos/profileResponse.dto';
+import { ProfileRequestDto } from '@infrastructure/data/auth/dtos/profileRequest.dto';
 
 @Controller('auth')
 export class AuthController {

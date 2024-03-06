@@ -8,36 +8,13 @@ datasource db {
 }
 
 model users {
-  id           String       @id @default(uuid())
-  name         String
-  email        String       @unique
+  id           String    @id @default(uuid())
+  email        String    @unique
   password     String
   display_name String
-  created_at   DateTime     @default(now())
-  updated_at   DateTime?    @updatedAt
-  deleted_at   DateTime?    @updatedAt
-  time_slots   time_slots[]
-}
-
-model time_slots {
-  id          String            @id @default(uuid())
-  name        String
-  description String
-  start_at    DateTime
-  end_at      DateTime
-  status      TimeslotStatusEnum
-  created_at  DateTime         @default(now())
-  updated_at  DateTime?        @updatedAt
-  deleted_at  DateTime?        @updatedAt
-  day         DaysEnum
-  userId      String
-  user        users            @relation(fields: [userId], references: [id])
-}
-
-enum TimeslotStatusEnum {
-  Undecided
-  Completed
-  Canceled
+  created_at   DateTime  @default(now())
+  updated_at   DateTime? @updatedAt
+  deleted_at   DateTime? @updatedAt
 }
 
 enum DaysEnum {

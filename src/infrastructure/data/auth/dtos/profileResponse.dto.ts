@@ -1,10 +1,6 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class ProfileResponseDto {
-  @IsNotEmpty()
-  @IsEmail()
-  name: string;
-
   @IsNotEmpty()
   display_name: string;
 

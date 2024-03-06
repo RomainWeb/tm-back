@@ -2,10 +2,10 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '@infrastructure/services/prisma/prisma.service';
 import { LoginPort } from '@domain/auth/ports/login.port';
-import { LoginRequestDto } from '@presentation/dtos/auth/loginRequest.dto';
 import { compare } from 'bcrypt';
 import { EnvironmentConfigService } from '@infrastructure/config/environment-config/environment-config.service';
-import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
+import { LoginResponseDto } from '@infrastructure/data/auth/dtos/loginResponse.dto';
+import { LoginRequestDto } from '@infrastructure/data/auth/dtos/loginRequest.dto';
 
 @Injectable()
 export class PrismaLoginAdapter implements LoginPort {
@@ -15,10 +15,10 @@ export class PrismaLoginAdapter implements LoginPort {
     private environmentConfigService: EnvironmentConfigService,
   ) {}
 
-  async login(data: LoginRequestDto): Promise<LoginResponseDto> {
+  async login(params: LoginRequestDto): Promise<LoginResponseDto> {
     const checkUserExists = await this.prisma.users.findFirst({
       where: {
-        email: data.email,
+        email: params.email,
       },
     });
 
@@ -27,7 +27,7 @@ export class PrismaLoginAdapter implements LoginPort {
     }
 
     const checkPassword = await compare(
-      data.password,
+      params.password,
       checkUserExists.password,
     );
 
@@ -35,7 +35,6 @@ export class PrismaLoginAdapter implements LoginPort {
       const accessToken = this.generateJWT(
         {
           sub: checkUserExists.id,
-          name: checkUserExists.name,
           email: checkUserExists.email,
         },
         this.environmentConfigService.JwtSecret,
@@ -45,7 +44,6 @@ export class PrismaLoginAdapter implements LoginPort {
       const refreshToken = this.generateJWT(
         {
           sub: checkUserExists.id,
-          name: checkUserExists.name,
           email: checkUserExists.email,
         },
         this.environmentConfigService.JwtSecretRefresh,

@@ -3,7 +3,6 @@ import { BaseDataEntity } from '@infrastructure/data/common/entities/baseDataEnt
 export interface UserDataEntity extends BaseDataEntity {
   id?: string;
   password: string;
-  name: string;
   email: string;
   display_name: string;
 }

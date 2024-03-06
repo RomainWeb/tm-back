@@ -1,12 +1,12 @@
 import { LoginPort } from '@domain/auth/ports/login.port';
-import { LoginRequestDto } from '@presentation/dtos/auth/loginRequest.dto';
-import { LoginResponseDto } from '@presentation/dtos/auth/loginResponse.dto';
 import { Inject } from '@nestjs/common';
+import { LoginRequestDto } from '@infrastructure/data/auth/dtos/loginRequest.dto';
+import { LoginResponseDto } from '@infrastructure/data/auth/dtos/loginResponse.dto';
 
 export class LoginUserUseCase {
   constructor(@Inject() private loginPort: LoginPort) {}
 
-  execute(data: LoginRequestDto): Promise<LoginResponseDto> {
-    return this.loginPort.login(data);
+  execute(params: LoginRequestDto): Promise<LoginResponseDto> {
+    return this.loginPort.login(params);
   }
 }

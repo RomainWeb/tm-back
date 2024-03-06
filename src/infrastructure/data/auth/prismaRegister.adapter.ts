@@ -2,9 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '@infrastructure/services/prisma/prisma.service';
-import { RegisterRequestDto } from '@presentation/dtos/auth/registerRequest.dto';
+import { RegisterRequestDto } from '@infrastructure/data/auth/dtos/registerRequest.dto';
 import { RegisterPort } from '@domain/auth/ports/register.port';
-import { RegisterResponseDto } from '@presentation/dtos/auth/registerResponse.dto';
+import { RegisterResponseDto } from '@infrastructure/data/auth/dtos/registerResponse.dto';
 
 @Injectable()
 export class PrismaRegisterAdapter implements RegisterPort {
